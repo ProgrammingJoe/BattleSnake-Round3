@@ -162,6 +162,8 @@ def get_move(data):
 
     if(my_head['x'] - my_neck['x'] == 0):
         vertical = True
+    else:
+        vertical = False
 
     print(vertical)
 
