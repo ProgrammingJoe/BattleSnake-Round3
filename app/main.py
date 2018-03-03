@@ -74,7 +74,7 @@ def add_food_points(food, board):
     y = food['y']
     for horiz in range(-4, 5):
         for vert in range(-4, 5):
-            if 0 <= x+horiz < len(board[0]) and 0 <= y+vert < len(board[0]):
+            if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
     return board
@@ -86,7 +86,7 @@ def plan_attack(scary, neck, head, board):
     if scary:
         for horiz in range(-1, 2):
             for vert in range(-1, 2):
-                if 0 <= x+horiz < len(board[0]) and 0 <= y+vert < len(board[0]):
+                if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                     board[x+horiz][y+vert] -= compute_bad_score(horiz, vert, x, y)
     else:
         if neck['x'] != x and neck['y'] != y:
@@ -96,10 +96,10 @@ def plan_attack(scary, neck, head, board):
             if 0 <= x-1 < len(board):
                 board[x-1][y] += 500
         if neck['x'] != x and neck['y'] != y:
-            if 0 <= y+1 < len(board):
+            if 0 <= y+1 < len(board[0]):
                 board[x][y+1] += 500
         if neck['x'] != x and neck['y'] != y:
-            if 0 <= y-1 < len(board):
+            if 0 <= y-1 < len(board[0]):
                 board[x][y-1] += 500
 
     return board
@@ -119,35 +119,41 @@ def get_move(data):
 
     for food in data['food']['data']:
         if compute_distance(my_head, food) < 40:
-            print("My Head " + str(my_head['x']) + ':' + str(my_head['y']))
             board = add_food_points(food, board)
 
     for snake in data['snakes']['data']:
         snake_part = 0
-        print('snake found')
         if(not (my_id == snake['id'] or snake['health'] == 0)):
             for index, body_part in enumerate(snake['body']['data']):
                 if compute_distance(food, body_part) < 40:
                     if(snake_part == 0):
                         if(len(snake['body']['data']) <= len(data['you']['body']['data'])):
-                            print('scary snek!')
                             board = plan_attack(True, snake['body']['data'][index+1], body_part, board)
                         else:
                             board = plan_attack(False, neck, body_part, board)
                     else:
-                        print('placing a -900')
                         board = plan_survival(body_part, board)
                     snake_part += 1
 
     for body_part in data['you']['body']['data']:
         board = dont_kill_yourself(body_part, board)
 
-    # print DataFrame(board)
+    print DataFrame(board)
+    options = dict([])
 
-    options = dict([('left', board[my_head['x']][my_head['y']-1]), ('up', board[my_head['x']+1][my_head['y']]), ('down', board[my_head['x']-1][my_head['y']]), ('right', board[my_head['x']][my_head['y']+1])])
+    if 0 <= my_head['y']-1 < len(board[0]):
+        options['left'] = board[my_head['x']][my_head['y']-1]
+    if 0 <= my_head['x']+1 < len(board):
+        options['down'] = board[my_head['x']+1][my_head['y']]
+    if 0 <= my_head['x']-1 < len(board):
+        options['up'] = board[my_head['x']-1][my_head['y']]
+    if 0 <= my_head['y']+1 < len(board[0]):
+        options['right'] = board[my_head['x']][my_head['y']+1]
 
     direction = min(options, key=options.get)
-    print direction
+
+    # print(options)
+
     return {
         'move': direction,
         'taunt': 'Snakes Everywhere! Ahhh!'
@@ -166,8 +172,8 @@ if __name__ == '__main__':
         "data": [
           {
             "object": "point",
-            "x": 4,
-            "y": 4
+            "x": 0,
+            "y": 0
           },
           {
             "object": "point",
@@ -286,18 +292,18 @@ if __name__ == '__main__':
           "data": [
             {
               "object": "point",
-              "x": 8,
-              "y": 8
+              "x": 19,
+              "y": 19
             },
             {
               "object": "point",
               "x": 8,
-              "y": 14
+              "y": 9
             },
             {
               "object": "point",
-              "x": 7,
-              "y": 14
+              "x": 8,
+              "y": 10
             }
           ],
           "object": "list"
