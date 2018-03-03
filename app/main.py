@@ -69,7 +69,7 @@ def compute_food_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    return (20 - distance)*2
+    return (40 - distance)
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
@@ -93,8 +93,8 @@ def add_food_points(food, board):
     x = food['x']
     y = food['y']
 
-    for horiz in range(-5, 6):
-        for vert in range(-5, 6):
+    for horiz in range(-10, 11):
+        for vert in range(-10, 11):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
@@ -136,22 +136,22 @@ def dont_kill_yourself(myself, board):
 
     return board
 
-# def find_chokes(vertical, my_head, layout, board):
-#     x = my_head['x']
-#     y = my_head['y']
-#
-#     if vertical:
-#         if(layout[x+1][y-1] in ['head', 'body'] and layout[x-1][y-1] in ['head', 'body']):
-#             board[x][y-1] -= 300
-#         elif(layout[x+1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
-#             board[x][y+1] -= 300
-#     else:
-#         if(layout[x+1][y-1] in ['head', 'body'] and layout[x+1][y-1] in ['head', 'body']):
-#             board[x+1][y] -= 300
-#         elif(layout[x-1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
-#             board[x-1][y] -= 300
-#
-#     return board
+def find_chokes(vertical, my_head, layout, board):
+    x = my_head['x']
+    y = my_head['y']
+
+    if vertical:
+        if(layout[x+1][y-1] in ['head', 'body'] and layout[x-1][y-1] in ['head', 'body']):
+            board[x][y-1] -= 300
+        elif(layout[x+1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
+            board[x][y+1] -= 300
+    else:
+        if(layout[x+1][y-1] in ['head', 'body'] and layout[x+1][y-1] in ['head', 'body']):
+            board[x+1][y] -= 300
+        elif(layout[x-1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
+            board[x-1][y] -= 300
+
+    return board
 
 
 def get_move(data):
