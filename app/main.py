@@ -33,6 +33,25 @@ def start():
         "tail_type": "regular"
     }
 
+def create_layout(data):
+    layout = [[0]*data['height'] for _ in range(data['width'])]
+
+    for food in data['food']['data']:
+        layout[food['x']][food['y']] = 'food'
+
+    for snake in data['snakes']['data']:
+        snake_piece = 0
+        snake_length = len(snake['body']['data'])
+        for body_part in snake['body']['data']:
+            if(snake_piece == 1):
+                layout[body_part['x']][body_part['y']] = 'head'
+            elif(snake_piece == snake_length - 1):
+                layout[body_part['x']][body_part['y']] = 'tail'
+            else:
+                layout[body_part['x']][body_part['y']] = 'body'
+
+    return layout
+
 def compute_distance(snake_head, other_block):
     y_diff = abs(snake_head['y'] - other_block['y'])
     x_diff = abs(snake_head['x'] - other_block['x'])
@@ -72,6 +91,7 @@ def compute_bad_score(score_x, score_y, x, y):
 def add_food_points(food, board):
     x = food['x']
     y = food['y']
+
     for horiz in range(-4, 5):
         for vert in range(-4, 5):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
@@ -83,6 +103,7 @@ def plan_attack(scary, neck, head, board):
     board[head['x']][head['y']] -= 900
     x = head['x']
     y = head['y']
+
     if scary:
         for horiz in range(-1, 2):
             for vert in range(-1, 2):
@@ -106,16 +127,20 @@ def plan_attack(scary, neck, head, board):
 
 def plan_survival(body_part, board):
     board[body_part['x']][body_part['y']] -= 900
+
     return board
 
 def dont_kill_yourself(myself, board):
     board[myself['x']][myself['y']] -= 900
+
     return board
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
     my_head = data['you']['body']['data'][0]
     my_id = data['you']['id']
+
+    create_layout(data)
 
     for food in data['food']['data']:
         if compute_distance(my_head, food) < 40:
