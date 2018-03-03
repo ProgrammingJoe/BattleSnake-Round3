@@ -136,11 +136,23 @@ def dont_kill_yourself(myself, board):
 
     return board
 
-# def find_chokes(my_head, layout, board):
-#     x = my_head['x']
-#     y = my_head['y']
-#
-#     if(layout[x+1][y+1] in ['head', 'body'] and layout[x-1][y] in ['head', 'body']):
+def find_chokes(vertical, my_head, layout, board):
+    x = my_head['x']
+    y = my_head['y']
+
+    if vertical:
+        if(layout[x+1][y-1] in ['head', 'body'] and layout[x-1][y-1] in ['head', 'body']):
+            board[x][y-1] -= 300
+        elif(layout[x+1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
+            board[x][y+1] -= 300
+    else:
+        if(layout[x+1][y-1] in ['head', 'body'] and layout[x+1][y-1] in ['head', 'body']):
+            board[x+1][y] -= 300
+        elif(layout[x-1][y+1] in ['head', 'body'] and layout[x-1][y+1] in ['head', 'body']):
+            board[x-1][y] -= 300
+
+    return board
+
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
@@ -181,7 +193,7 @@ def get_move(data):
         board = dont_kill_yourself(body_part, board)
 
     # Find scary places
-    # find_chokes(my_head, layout, board)
+    board = find_chokes(vertical, my_head, layout, board)
 
     # print DataFrame(layout)
     options = dict([])
