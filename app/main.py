@@ -155,16 +155,19 @@ def find_chokes(vertical, my_head, layout, board):
 
 def avoid_wall(board):
     width = len(board[0])
-    length = len(board)
+    height = len(board)
 
     for y in range(0, width):
         board[0][y] -= 40
     for y in range(0, width):
         board[height-1][y] -= 40
+
     for x in range(0, height):
         board[x][0] -= 40
     for x in range(0, height):
-        board[width-1][0] -= 40
+        board[x][width-1] -= 40
+
+    return board
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
@@ -176,8 +179,6 @@ def get_move(data):
         vertical = True
     else:
         vertical = False
-
-    print(vertical)
 
     layout = create_layout(data)
 
@@ -210,7 +211,7 @@ def get_move(data):
     # board = find_chokes(vertical, my_head, layout, board)
     board = avoid_wall(board)
 
-    # print DataFrame(layout)
+    # print DataFrame(board)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board):
@@ -222,9 +223,9 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
-    print(options)
+    # print(options)
     direction = max(options, key=options.get)
-    print(direction)
+    # print(direction)
 
     return {
         'move': direction,
