@@ -183,13 +183,13 @@ def get_move(data):
     # print DataFrame(board)
     options = dict([])
 
-    if 0 <= my_head['y']-1 < len(board[0]):
+    if 0 <= my_head['y']-1 < len(board):
         options['left'] = board[my_head['x']][my_head['y']-1]
-    if 0 <= my_head['x']+1 < len(board):
+    if 0 <= my_head['x']+1 < len(board[0]):
         options['down'] = board[my_head['x']+1][my_head['y']]
-    if 0 <= my_head['x']-1 < len(board):
+    if 0 <= my_head['x']-1 < len(board[0]):
         options['up'] = board[my_head['x']-1][my_head['y']]
-    if 0 <= my_head['y']+1 < len(board[0]):
+    if 0 <= my_head['y']+1 < len(board):
         options['right'] = board[my_head['x']][my_head['y']+1]
 
     print(options)
