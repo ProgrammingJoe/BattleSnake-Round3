@@ -69,7 +69,7 @@ def compute_food_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    return (40 - distance)*2
+    return (20 - distance)*2
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
@@ -136,21 +136,22 @@ def dont_kill_yourself(myself, board):
 
     return board
 
-def find_chokes(my_head, layout, board):
-    x = my_head['x']
-    y = my_head['y']
-
-    for horiz in range(-2, 3):
-        for vert in range(-2, 3):
-            danger_blocks = 0
-            if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
-                # if layout[x+1]
-                board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
+# def find_chokes(my_head, layout, board):
+#     x = my_head['x']
+#     y = my_head['y']
+#
+#     if(layout[x+1][y+1] in ['head', 'body'] and layout[x-1][y] in ['head', 'body']):
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
     my_head = data['you']['body']['data'][0]
+    my_neck = data['you']['body']['data'][1]
     my_id = data['you']['id']
+
+    if(my_head['x'] - my_neck['x'] == 0):
+        vertical = True
+
+    print(vertical)
 
     layout = create_layout(data)
 
@@ -185,13 +186,13 @@ def get_move(data):
     # print DataFrame(layout)
     options = dict([])
 
-    if 0 <= my_head['y']-1 < len(board[0]):
+    if 0 <= my_head['y']-1 < len(board):
         options['up'] = board[my_head['x']][my_head['y']-1]
-    if 0 <= my_head['x']+1 < len(board):
+    if 0 <= my_head['x']+1 < len(board[0]):
         options['right'] = board[my_head['x']+1][my_head['y']]
-    if 0 <= my_head['x']-1 < len(board):
+    if 0 <= my_head['x']-1 < len(board[0]):
         options['left'] = board[my_head['x']-1][my_head['y']]
-    if 0 <= my_head['y']+1 < len(board[0]):
+    if 0 <= my_head['y']+1 < len(board):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
     print(options)
