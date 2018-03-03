@@ -181,7 +181,7 @@ def get_move(data):
     # Find scary places
     # find_chokes(my_head, layout, board)
 
-    print DataFrame(board)
+    print DataFrame(layout)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board[0]):
@@ -196,9 +196,6 @@ def get_move(data):
     print(options)
     direction = max(options, key=options.get)
     print(direction)
-
-    # print(options)
-    # print(direction)
 
     return {
         'move': direction,
