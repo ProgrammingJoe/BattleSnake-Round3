@@ -40,25 +40,25 @@ def compute_distance(snake_head, other_block):
 
 def compute_food_score(score_x, score_y, x, y):
     block1 = {
-        'x': score_x,
-        'y': score_y
-    }
-    block2 = {
         'x': x,
         'y': y
+    }
+    block2 = {
+        'x': x + score_x,
+        'y': y + score_y
     }
     distance = compute_distance(block1, block2)
 
-    return 20 - distance
+    return 40 - distance
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
-        'x': score_x,
-        'y': score_y
-    }
-    block2 = {
         'x': x,
         'y': y
+    }
+    block2 = {
+        'x': x + score_x,
+        'y': y + score_y
     }
     distance = compute_distance(block1, block2)
 
@@ -72,8 +72,8 @@ def compute_bad_score(score_x, score_y, x, y):
 def add_food_points(food, board):
     x = food['x']
     y = food['y']
-    for horiz in range(-2, 3):
-        for vert in range(-2, 3):
+    for horiz in range(-4, 5):
+        for vert in range(-4, 5):
             if 0 <= x+horiz < len(board[0]) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
@@ -118,7 +118,8 @@ def get_move(data):
     my_id = data['you']['id']
 
     for food in data['food']['data']:
-        if compute_distance(my_head, food) < 20:
+        if compute_distance(my_head, food) < 40:
+            print("My Head " + str(my_head['x']) + ':' + str(my_head['y']))
             board = add_food_points(food, board)
 
     for snake in data['snakes']['data']:
@@ -138,10 +139,10 @@ def get_move(data):
                         board = plan_survival(body_part, board)
                     snake_part += 1
 
-    print DataFrame(board)
-
     for body_part in data['you']['body']['data']:
         board = dont_kill_yourself(body_part, board)
+
+    print DataFrame(board)
 
     options = dict([('left', board[my_head['x']][my_head['y']-1]), ('up', board[my_head['x']+1][my_head['y']]), ('down', board[my_head['x']-1][my_head['y']]), ('right', board[my_head['x']][my_head['y']+1])])
 
@@ -165,8 +166,23 @@ if __name__ == '__main__':
         "data": [
           {
             "object": "point",
-            "x": 0,
-            "y": 9
+            "x": 4,
+            "y": 4
+          },
+          {
+            "object": "point",
+            "x": 12,
+            "y": 12
+          },
+          {
+            "object": "point",
+            "x": 9,
+            "y": 13
+          },
+          {
+            "object": "point",
+            "x": 18,
+            "y": 3
           }
         ],
         "object": "list"
@@ -210,23 +226,51 @@ if __name__ == '__main__':
                 {
                   "object": "point",
                   "x": 8,
-                  "y": 15
+                  "y": 3
                 },
                 {
                   "object": "point",
                   "x": 7,
-                  "y": 15
+                  "y": 3
                 },
                 {
                   "object": "point",
                   "x": 6,
-                  "y": 15
+                  "y": 3
                 }
               ],
               "object": "list"
             },
             "health": 100,
             "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
+            "length": 3,
+            "name": "Typescript Snake",
+            "object": "snake",
+            "taunt": ""
+          },
+          {
+            "body": {
+              "data": [
+                {
+                  "object": "point",
+                  "x": 12,
+                  "y": 8
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 8
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 7
+                }
+              ],
+              "object": "list"
+            },
+            "health": 100,
+            "id": "48ca23a2-dde8-4sefd0f-b03a-61cc9780427e",
             "length": 3,
             "name": "Typescript Snake",
             "object": "snake",
@@ -243,7 +287,7 @@ if __name__ == '__main__':
             {
               "object": "point",
               "x": 8,
-              "y": 15
+              "y": 8
             },
             {
               "object": "point",
