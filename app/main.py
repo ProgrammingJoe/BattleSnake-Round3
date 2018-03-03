@@ -43,12 +43,13 @@ def create_layout(data):
         snake_piece = 0
         snake_length = len(snake['body']['data'])
         for body_part in snake['body']['data']:
-            if(snake_piece == 1):
+            if(snake_piece == 0):
                 layout[body_part['x']][body_part['y']] = 'head'
             elif(snake_piece == snake_length - 1):
                 layout[body_part['x']][body_part['y']] = 'tail'
             else:
                 layout[body_part['x']][body_part['y']] = 'body'
+            snake_piece += 1
 
     return layout
 
