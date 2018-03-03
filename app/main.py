@@ -192,10 +192,11 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board[0]):
         options['right'] = board[my_head['x']][my_head['y']+1]
 
+    print(options)
     direction = min(options, key=options.get)
 
     # print(options)
-    print(direction)
+    # print(direction)
 
     return {
         'move': direction,
