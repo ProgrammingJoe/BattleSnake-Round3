@@ -183,17 +183,17 @@ def get_move(data):
     # print DataFrame(board)
     options = dict([])
 
-    if 0 <= my_head['y']-1 < len(board):
+    if 0 <= my_head['y']-1 < len(board[0]):
         options['left'] = board[my_head['x']][my_head['y']-1]
-    if 0 <= my_head['x']+1 < len(board[0]):
+    if 0 <= my_head['x']+1 < len(board):
         options['down'] = board[my_head['x']+1][my_head['y']]
-    if 0 <= my_head['x']-1 < len(board[0]):
+    if 0 <= my_head['x']-1 < len(board):
         options['up'] = board[my_head['x']-1][my_head['y']]
-    if 0 <= my_head['y']+1 < len(board):
+    if 0 <= my_head['y']+1 < len(board[0]):
         options['right'] = board[my_head['x']][my_head['y']+1]
 
     print(options)
-    direction = min(options, key=options.get)
+    direction = max(options, key=options.get)
 
     # print(options)
     # print(direction)
@@ -212,160 +212,160 @@ def move():
 application = bottle.default_app()
 
 if __name__ == '__main__':
-    # data = {
-    #   "food": {
-    #     "data": [
-    #       {
-    #         "object": "point",
-    #         "x": 0,
-    #         "y": 0
-    #       },
-    #       {
-    #         "object": "point",
-    #         "x": 12,
-    #         "y": 12
-    #       },
-    #       {
-    #         "object": "point",
-    #         "x": 9,
-    #         "y": 13
-    #       },
-    #       {
-    #         "object": "point",
-    #         "x": 18,
-    #         "y": 3
-    #       }
-    #     ],
-    #     "object": "list"
-    #   },
-    #   "height": 20,
-    #   "id": 1,
-    #   "object": "world",
-    #   "snakes": {
-    #     "data": [
-    #       {
-    #         "body": {
-    #           "data": [
-    #             {
-    #               "object": "point",
-    #               "x": 13,
-    #               "y": 19
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 13,
-    #               "y": 18
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 13,
-    #               "y": 17
-    #             }
-    #           ],
-    #           "object": "list"
-    #         },
-    #         "health": 100,
-    #         "id": "58a0142f-4cd7-4d35-9b17-815ec8ff8e70",
-    #         "length": 3,
-    #         "name": "Sonic Snake",
-    #         "object": "snake",
-    #         "taunt": "Gotta go fast"
-    #       },
-    #       {
-    #         "body": {
-    #           "data": [
-    #             {
-    #               "object": "point",
-    #               "x": 8,
-    #               "y": 3
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 7,
-    #               "y": 3
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 6,
-    #               "y": 3
-    #             }
-    #           ],
-    #           "object": "list"
-    #         },
-    #         "health": 100,
-    #         "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
-    #         "length": 3,
-    #         "name": "Typescript Snake",
-    #         "object": "snake",
-    #         "taunt": ""
-    #       },
-    #       {
-    #         "body": {
-    #           "data": [
-    #             {
-    #               "object": "point",
-    #               "x": 12,
-    #               "y": 8
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 13,
-    #               "y": 8
-    #             },
-    #             {
-    #               "object": "point",
-    #               "x": 13,
-    #               "y": 7
-    #             }
-    #           ],
-    #           "object": "list"
-    #         },
-    #         "health": 100,
-    #         "id": "48ca23a2-dde8-4sefd0f-b03a-61cc9780427e",
-    #         "length": 3,
-    #         "name": "Typescript Snake",
-    #         "object": "snake",
-    #         "taunt": ""
-    #       }
-    #     ],
-    #     "object": "list"
-    #   },
-    #   "turn": 0,
-    #   "width": 20,
-    #   "you": {
-    #     "body": {
-    #       "data": [
-    #         {
-    #           "object": "point",
-    #           "x": 19,
-    #           "y": 19
-    #         },
-    #         {
-    #           "object": "point",
-    #           "x": 8,
-    #           "y": 9
-    #         },
-    #         {
-    #           "object": "point",
-    #           "x": 8,
-    #           "y": 10
-    #         }
-    #       ],
-    #       "object": "list"
-    #     },
-    #     "health": 100,
-    #     "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
-    #     "length": 3,
-    #     "name": "Typescript Snake",
-    #     "object": "snake",
-    #     "taunt": ""
-    #   }
-    # }
-    #
-    # get_move(data)
+    data = {
+      "food": {
+        "data": [
+          {
+            "object": "point",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "object": "point",
+            "x": 12,
+            "y": 12
+          },
+          {
+            "object": "point",
+            "x": 9,
+            "y": 13
+          },
+          {
+            "object": "point",
+            "x": 18,
+            "y": 3
+          }
+        ],
+        "object": "list"
+      },
+      "height": 20,
+      "id": 1,
+      "object": "world",
+      "snakes": {
+        "data": [
+          {
+            "body": {
+              "data": [
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 19
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 18
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 17
+                }
+              ],
+              "object": "list"
+            },
+            "health": 100,
+            "id": "58a0142f-4cd7-4d35-9b17-815ec8ff8e70",
+            "length": 3,
+            "name": "Sonic Snake",
+            "object": "snake",
+            "taunt": "Gotta go fast"
+          },
+          {
+            "body": {
+              "data": [
+                {
+                  "object": "point",
+                  "x": 8,
+                  "y": 3
+                },
+                {
+                  "object": "point",
+                  "x": 7,
+                  "y": 3
+                },
+                {
+                  "object": "point",
+                  "x": 6,
+                  "y": 3
+                }
+              ],
+              "object": "list"
+            },
+            "health": 100,
+            "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
+            "length": 3,
+            "name": "Typescript Snake",
+            "object": "snake",
+            "taunt": ""
+          },
+          {
+            "body": {
+              "data": [
+                {
+                  "object": "point",
+                  "x": 12,
+                  "y": 8
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 8
+                },
+                {
+                  "object": "point",
+                  "x": 13,
+                  "y": 7
+                }
+              ],
+              "object": "list"
+            },
+            "health": 100,
+            "id": "48ca23a2-dde8-4sefd0f-b03a-61cc9780427e",
+            "length": 3,
+            "name": "Typescript Snake",
+            "object": "snake",
+            "taunt": ""
+          }
+        ],
+        "object": "list"
+      },
+      "turn": 0,
+      "width": 20,
+      "you": {
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 12,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 10
+            }
+          ],
+          "object": "list"
+        },
+        "health": 100,
+        "id": "48ca23a2-dde8-4d0f-b03a-61cc9780427e",
+        "length": 3,
+        "name": "Typescript Snake",
+        "object": "snake",
+        "taunt": ""
+      }
+    }
 
-    bottle.run(
-        application,
-        host=os.getenv('IP', '0.0.0.0'),
-        port=os.getenv('PORT', '8080'),
-        debug = True)
+    get_move(data)
+
+    # bottle.run(
+    #     application,
+    #     host=os.getenv('IP', '0.0.0.0'),
+    #     port=os.getenv('PORT', '8080'),
+    #     debug = True)
