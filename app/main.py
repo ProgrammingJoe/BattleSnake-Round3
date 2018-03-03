@@ -158,14 +158,14 @@ def avoid_wall(board):
     height = len(board)
 
     for y in range(0, width):
-        board[0][y] -= 40
+        board[0][y] -= 20
     for y in range(0, width):
-        board[height-1][y] -= 40
+        board[height-1][y] -= 20
 
     for x in range(0, height):
-        board[x][0] -= 40
+        board[x][0] -= 20
     for x in range(0, height):
-        board[x][width-1] -= 40
+        board[x][width-1] -= 20
 
     return board
 
