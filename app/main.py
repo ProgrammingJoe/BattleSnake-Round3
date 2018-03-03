@@ -69,7 +69,7 @@ def compute_food_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    return (40 - distance)
+    return (15 - distance)
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
@@ -93,8 +93,8 @@ def add_food_points(food, board):
     x = food['x']
     y = food['y']
 
-    for horiz in range(-8, 9):
-        for vert in range(-8, 9):
+    for horiz in range(-7, 8):
+        for vert in range(-7, 8):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
