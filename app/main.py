@@ -29,7 +29,7 @@ def start():
         'color': '#000000',
         'taunt': 'Snakes Everywhere! Ahhh!',
         'head_url': head_url,
-        "head_type": "sand-worm",
+        "head_type": "tongue",
         "tail_type": "regular"
     }
 
