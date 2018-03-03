@@ -69,7 +69,7 @@ def compute_food_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    return 40 - distance
+    return (40 - distance)*2
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
@@ -93,8 +93,8 @@ def add_food_points(food, board):
     x = food['x']
     y = food['y']
 
-    for horiz in range(-6, 7):
-        for vert in range(-6, 7):
+    for horiz in range(-5, 6):
+        for vert in range(-5, 6):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
@@ -136,16 +136,16 @@ def dont_kill_yourself(myself, board):
 
     return board
 
-# def find_chokes(my_head, layout, board):
-#     x = my_head['x']
-#     y = my_head['y']
-#
-#     for horiz in range(-2, 3):
-#         for vert in range(-2, 3):
-#             danger_blocks = 0
-#             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
-#                 # if layout[x+1]
-#                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
+def find_chokes(my_head, layout, board):
+    x = my_head['x']
+    y = my_head['y']
+
+    for horiz in range(-2, 3):
+        for vert in range(-2, 3):
+            danger_blocks = 0
+            if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
+                # if layout[x+1]
+                board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
