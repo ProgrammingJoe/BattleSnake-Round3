@@ -194,9 +194,9 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board[0]):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
-    # print(options)
+    print(options)
     direction = max(options, key=options.get)
-    # print(direction)
+    print(direction)
 
     return {
         'move': direction,
