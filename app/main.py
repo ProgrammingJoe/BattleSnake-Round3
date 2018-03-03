@@ -153,6 +153,18 @@ def find_chokes(vertical, my_head, layout, board):
 
     return board
 
+def avoid_wall(board):
+    width = len(board[0])
+    length = len(board)
+
+    for y in range(0, width):
+        board[0][y] -= 40
+    for y in range(0, width):
+        board[height-1][y] -= 40
+    for x in range(0, height):
+        board[x][0] -= 40
+    for x in range(0, height):
+        board[width-1][0] -= 40
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
@@ -196,6 +208,7 @@ def get_move(data):
 
     # Find scary places
     # board = find_chokes(vertical, my_head, layout, board)
+    board = avoid_wall(board)
 
     # print DataFrame(layout)
     options = dict([])
