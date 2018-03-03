@@ -195,6 +195,7 @@ def get_move(data):
     direction = min(options, key=options.get)
 
     # print(options)
+    print(direction)
 
     return {
         'move': direction,
@@ -204,6 +205,7 @@ def get_move(data):
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    get_move(data)
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
