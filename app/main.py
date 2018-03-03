@@ -184,13 +184,13 @@ def get_move(data):
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board[0]):
-        options['right'] = board[my_head['x']][my_head['y']-1]
+        options['down'] = board[my_head['x']][my_head['y']-1]
     if 0 <= my_head['x']+1 < len(board):
-        options['up'] = board[my_head['x']+1][my_head['y']]
+        options['left'] = board[my_head['x']+1][my_head['y']]
     if 0 <= my_head['x']-1 < len(board):
-        options['down'] = board[my_head['x']-1][my_head['y']]
+        options['right'] = board[my_head['x']-1][my_head['y']]
     if 0 <= my_head['y']+1 < len(board[0]):
-        options['left'] = board[my_head['x']][my_head['y']+1]
+        options['up'] = board[my_head['x']][my_head['y']+1]
 
     print(options)
     direction = max(options, key=options.get)
