@@ -31,7 +31,9 @@ def start():
     return {
         'color': '#00FF00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': head_url
+        'head_url': head_url,
+        "head_type": "pixel",
+        "tail_type": "pixel"
     }
 
 
@@ -40,7 +42,7 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
-    
+
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
     print direction
