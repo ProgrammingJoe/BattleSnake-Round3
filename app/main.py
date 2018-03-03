@@ -163,9 +163,9 @@ def get_move(data):
         snake_part = 0
         if(not (my_id == snake['id'] or snake['health'] == 0)):
             for index, body_part in enumerate(snake['body']['data']):
-                neck = snake['body']['data'][index+1]
                 if compute_distance(food, body_part) < 40:
                     if(snake_part == 0):
+                        neck = snake['body']['data'][index+1]
                         if(len(snake['body']['data']) <= len(data['you']['body']['data'])):
                             board = plan_attack(True, neck, body_part, board)
                         else:
