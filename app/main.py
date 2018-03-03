@@ -142,7 +142,7 @@ def get_move(data):
     for body_part in data['you']['body']['data']:
         board = dont_kill_yourself(body_part, board)
 
-    print DataFrame(board)
+    # print DataFrame(board)
 
     options = dict([('left', board[my_head['x']][my_head['y']-1]), ('up', board[my_head['x']+1][my_head['y']]), ('down', board[my_head['x']-1][my_head['y']]), ('right', board[my_head['x']][my_head['y']+1])])
 
