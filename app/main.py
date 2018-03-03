@@ -205,7 +205,7 @@ def get_move(data):
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    get_move(data)
+    return get_move(data)
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
