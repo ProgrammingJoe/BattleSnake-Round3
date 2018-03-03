@@ -26,7 +26,7 @@ def start():
     )
 
     return {
-        'color': '#6E5D54',
+        'color': '#6A412E',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
         "head_type": "sand-worm",
