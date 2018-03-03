@@ -26,7 +26,7 @@ def start():
     )
 
     return {
-        'color': '#6A412E',
+        'color': '#000000',
         'taunt': 'Snakes Everywhere! Ahhh!',
         'head_url': head_url,
         "head_type": "sand-worm",
