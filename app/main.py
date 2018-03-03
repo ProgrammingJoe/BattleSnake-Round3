@@ -27,7 +27,7 @@ def start():
 
     return {
         'color': '#6A412E',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
+        'taunt': 'Snakes Everywhere! Ahhh!',
         'head_url': head_url,
         "head_type": "sand-worm",
         "tail_type": "regular"
