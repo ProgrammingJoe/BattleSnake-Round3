@@ -93,8 +93,8 @@ def add_food_points(food, board):
     x = food['x']
     y = food['y']
 
-    for horiz in range(-10, 11):
-        for vert in range(-10, 11):
+    for horiz in range(-8, 9):
+        for vert in range(-8, 9):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
