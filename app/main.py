@@ -135,16 +135,16 @@ def dont_kill_yourself(myself, board):
 
     return board
 
-def find_chokes(my_head, layout, board):
-    x = my_head['x']
-    y = my_head['y']
-
-    for horiz in range(-2, 3):
-        for vert in range(-2, 3):
-            danger_blocks = 0
-            if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
-                # if layout[x+1]
-                board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
+# def find_chokes(my_head, layout, board):
+#     x = my_head['x']
+#     y = my_head['y']
+#
+#     for horiz in range(-2, 3):
+#         for vert in range(-2, 3):
+#             danger_blocks = 0
+#             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
+#                 # if layout[x+1]
+#                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
 def get_move(data):
     board = [[0]*data['height'] for _ in range(data['width'])]
@@ -180,7 +180,7 @@ def get_move(data):
     # Find scary places
     # find_chokes(my_head, layout, board)
 
-    # print DataFrame(board)
+    print DataFrame(board)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board[0]):
@@ -194,6 +194,7 @@ def get_move(data):
 
     print(options)
     direction = max(options, key=options.get)
+    print(direction)
 
     # print(options)
     # print(direction)
