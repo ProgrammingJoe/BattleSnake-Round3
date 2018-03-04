@@ -212,7 +212,7 @@ def get_move(data):
     # board = find_chokes(vertical, my_head, layout, board)
     board = avoid_wall(board)
 
-    # print DataFrame(board)
+    print DataFrame(board)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board):
@@ -224,9 +224,9 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
-    # print(options)
+    print(options)
     direction = max(options, key=options.get)
-    # print(direction)
+    print(direction)
 
     return {
         'move': direction,
