@@ -82,9 +82,7 @@ def compute_bad_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    if distance == 2:
-        return 10
-    elif distance == 1:
+    if distance == 1:
         return 50
     else:
         return 900
@@ -213,6 +211,7 @@ def get_move(data):
     board = avoid_wall(board)
 
     print DataFrame(layout)
+    print DataFrame(board)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board):
@@ -224,9 +223,9 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
-    print(options)
+    # print(options)
     direction = max(options, key=options.get)
-    print(direction)
+    # print(direction)
 
     return {
         'move': direction,
