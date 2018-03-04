@@ -69,7 +69,7 @@ def compute_food_score(score_x, score_y, x, y):
     }
     distance = compute_distance(block1, block2)
 
-    return (20 - distance)
+    return (16 - distance)
 
 def compute_bad_score(score_x, score_y, x, y):
     block1 = {
@@ -91,8 +91,8 @@ def add_food_points(food, board):
     x = food['x']
     y = food['y']
 
-    for horiz in range(-9, 10):
-        for vert in range(-9, 10):
+    for horiz in range(-7, 8):
+        for vert in range(-7, 8):
             if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                 board[x+horiz][y+vert] += compute_food_score(horiz, vert, x, y)
 
@@ -182,7 +182,7 @@ def get_move(data):
 
     # Add food scores
     for food in data['food']['data']:
-        if compute_distance(my_head, food) < 40:
+        if compute_distance(my_head, food) < 16:
             board = add_food_points(food, board)
 
     # Add snake scores
