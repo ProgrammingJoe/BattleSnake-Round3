@@ -111,16 +111,16 @@ def plan_attack(scary, neck, head, board):
                 if 0 <= x+horiz < len(board) and 0 <= y+vert < len(board[0]):
                     board[x+horiz][y+vert] -= compute_bad_score(horiz, vert, x, y)
     else:
-        if neck['x'] != x and neck['y'] != y:
+        if neck['x'] != x+1:
             if 0 <= x+1 < len(board):
                 board[x+1][y] += 500
-        if neck['x'] != x and neck['y'] != y:
+        if neck['x'] != x-1:
             if 0 <= x-1 < len(board):
                 board[x-1][y] += 500
-        if neck['x'] != x and neck['y'] != y:
+        if neck['y'] != y+1:
             if 0 <= y+1 < len(board[0]):
                 board[x][y+1] += 500
-        if neck['x'] != x and neck['y'] != y:
+        if neck['y'] != y-1:
             if 0 <= y-1 < len(board[0]):
                 board[x][y-1] += 500
 
@@ -194,7 +194,7 @@ def get_move(data):
             for index, body_part in enumerate(snake['body']['data']):
                 if compute_distance(food, body_part) < 20:
                     if(snake_part == 0):
-                        neck = snake['body']['data'][index+1]
+                        neck = snake['body']['data'][1]
                         if(len(snake['body']['data']) <= len(data['you']['body']['data'])):
                             board = plan_attack(True, neck, body_part, board)
                         else:
@@ -212,7 +212,7 @@ def get_move(data):
     # board = find_chokes(vertical, my_head, layout, board)
     board = avoid_wall(board)
 
-    print DataFrame(board)
+    # print DataFrame(board)
     options = dict([])
 
     if 0 <= my_head['y']-1 < len(board):
@@ -224,9 +224,9 @@ def get_move(data):
     if 0 <= my_head['y']+1 < len(board):
         options['down'] = board[my_head['x']][my_head['y']+1]
 
-    print(options)
+    # print(options)
     direction = max(options, key=options.get)
-    print(direction)
+    # print(direction)
 
     return {
         'move': direction,
