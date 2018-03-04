@@ -199,6 +199,7 @@ def get_move(data):
                             board = plan_attack(True, neck, body_part, board)
                         else:
                             board = plan_attack(False, neck, body_part, board)
+                        snake_part += 1
                     else:
                         board = plan_survival(body_part, board)
                     snake_part += 1
