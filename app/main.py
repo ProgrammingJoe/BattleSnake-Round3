@@ -26,7 +26,7 @@ def start():
     )
 
     return {
-        'color': '#000000',
+        'color': '#5D4E6B',
         'taunt': 'Snakes Everywhere! Ahhh!',
         'head_url': head_url,
         "head_type": "tongue",
@@ -208,7 +208,7 @@ def get_move(data):
 
     # Find scary places
     # board = find_chokes(vertical, my_head, layout, board)
-    board = avoid_wall(board)
+    # board = avoid_wall(board)
 
     # print DataFrame(layout)
     # print DataFrame(board)
