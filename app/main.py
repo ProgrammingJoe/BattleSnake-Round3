@@ -83,7 +83,7 @@ def compute_bad_score(score_x, score_y, x, y):
     distance = compute_distance(block1, block2)
 
     if distance == 1:
-        return 50
+        return 100
     else:
         return 900
 
